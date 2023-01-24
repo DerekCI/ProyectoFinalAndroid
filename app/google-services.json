@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "467475963137",
+    "project_id": "proyectodiplomado-1c348",
+    "storage_bucket": "proyectodiplomado-1c348.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:467475963137:android:72e6fce421b22bf65d0f00",
+        "android_client_info": {
+          "package_name": "dgtic.unam.proyectoandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "467475963137-6agvpv9uilp2e68hd0hcnjllgp0ov8b8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCURLUEFAcdqq5IN1rbe4Kj0JLqR98fld8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "467475963137-6agvpv9uilp2e68hd0hcnjllgp0ov8b8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

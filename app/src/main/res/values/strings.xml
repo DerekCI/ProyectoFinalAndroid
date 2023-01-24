@@ -2,7 +2,7 @@
     <string name="app_name">Chaz</string>
     <string name="google">Google</string>
 
-    <string name="facebook_app_id">488676606671125</string>
-    <string name="fb_login_protocol_scheme">fb488676606671125</string>
-    <string name="facebook_client_token">08bf73d22c4d0084f4dac7992a00a85f</string>
+    <string name="facebook_app_id">715622570095068</string>
+    <string name="fb_login_protocol_scheme">fb715622570095068</string>
+    <string name="facebook_client_token">1f53174925e36919b416b820672a90d8</string>
 </resources>

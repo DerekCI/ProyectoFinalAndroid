@@ -1,5 +1,6 @@
 package dgtic.unam.proyectoandroid
 
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
@@ -42,7 +43,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
+        mMap.addMarker(MarkerOptions().position(sydney))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
 }

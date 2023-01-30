@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="dgtic.unam.proyectoandroid">
 
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -21,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProyectoAndroid"
         tools:targetApi="31">
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
         <!-- Recommended for Android 9 (API level 28) and lower. -->
         <!-- Required for Android 10 (API level 29) and higher. -->
         <!--
@@ -45,14 +47,13 @@
             android:value="@string/facebook_client_token" />
 
         <activity
-            android:name=".AuthActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
+            android:name=".MapsActivity"
+            android:exported="false"/>
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".MapsActivity"
+            android:name=".AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

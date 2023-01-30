@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
@@ -47,7 +48,7 @@ class AuthActivity : AppCompatActivity() {
 
         if(email != null && provider != null){
             binding.authLayout.visibility = View.INVISIBLE
-            showHome(email, ProviderType.valueOf(provider))
+            showMap(email, ProviderType.valueOf(provider))
         }
     }
 
@@ -57,19 +58,21 @@ class AuthActivity : AppCompatActivity() {
             if(binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty()){
                 FirebaseAuth.getInstance().createUserWithEmailAndPassword(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString() ).addOnCompleteListener{
                     if(it.isSuccessful){
-                        showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
+
+                        showMap(it.result?.user?.email ?: "", ProviderType.BASIC)
                     }else{
                         showAlert()
                     }
                 }
 
             }
+
         }
         binding.logInButton.setOnClickListener{
             if(binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty()){
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString() ).addOnCompleteListener{
                     if(it.isSuccessful){
-                        showHome(it.result?.user?.email ?: "", ProviderType.BASIC)
+                        showMap(it.result?.user?.email ?: "", ProviderType.BASIC)
                     }else{
                         showAlert()
                     }
@@ -97,7 +100,7 @@ class AuthActivity : AppCompatActivity() {
                             val credential = FacebookAuthProvider.getCredential(token.token)
                             FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
                                 if(it.isSuccessful){
-                                    showHome(it.result?.user?.email ?: "", ProviderType.FACEBOOK)
+                                    showMap(it.result?.user?.email ?: "", ProviderType.FACEBOOK)
                                 }else{
                                     showAlert()
                                 }
@@ -115,6 +118,7 @@ class AuthActivity : AppCompatActivity() {
                 })
         }
 
+
     }
     private fun showAlert(){
         val builder = AlertDialog.Builder(this)
@@ -124,8 +128,8 @@ class AuthActivity : AppCompatActivity() {
         val dialog: AlertDialog = builder.create()
         dialog.show()
     }
-    private fun showHome(email:String, provider: ProviderType){
-        val homeIntent = Intent(this, HomeActivity::class.java).apply {
+    private fun showMap(email:String, provider: ProviderType){
+        val homeIntent = Intent(this, MapsActivity::class.java).apply {
             putExtra("email", email)
             putExtra("provider", provider.name)
         }
@@ -144,7 +148,7 @@ class AuthActivity : AppCompatActivity() {
                     val credential = GoogleAuthProvider.getCredential(account.idToken,null)
                     FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener{
                         if(it.isSuccessful){
-                            showHome(account.email ?: "", ProviderType.GOOGLE)
+                            showMap(account.email ?: "", ProviderType.GOOGLE)
                         }else{
                             showAlert()
                         }

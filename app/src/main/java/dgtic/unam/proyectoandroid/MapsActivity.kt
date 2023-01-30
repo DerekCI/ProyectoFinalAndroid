@@ -1,28 +1,33 @@
 package dgtic.unam.proyectoandroid
 
 import android.Manifest
-import android.annotation.SuppressLint
-import android.content.IntentSender
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.view.View
+import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
-import com.google.android.gms.common.api.ResolvableApiException
 import androidx.core.app.ActivityCompat
-import com.google.android.gms.location.*
-import com.google.android.gms.location.LocationServices.getFusedLocationProviderClient
+import androidx.core.view.postDelayed
+import com.google.android.gms.common.api.GoogleApiClient
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.*
 import com.google.android.gms.maps.model.*
 
-import com.google.android.gms.tasks.Task
 import dgtic.unam.proyectoandroid.databinding.ActivityMapsBinding
 
-class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLocationButtonClickListener, GoogleMap.OnMyLocationClickListener {
+class MapsActivity : AppCompatActivity(),
+    OnMapReadyCallback,
+    GoogleMap.OnMyLocationButtonClickListener,
+    GoogleMap.OnMyLocationClickListener {
 
     private lateinit var mMap: GoogleMap
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var binding: ActivityMapsBinding
     companion object{
         const val REQUEST_CODE_LOCATION = 0
@@ -36,10 +41,25 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val bundle = intent.extras
+        val email = bundle?.getString("email")
+        //val provider = bundle?.getString("provider")
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
+        binding.perfilButton.setOnClickListener{
+            val profileIntent = Intent(this, ProfileActivity::class.java).apply {
+                putExtra("email", email)
+                //putExtra("provider", provider.name)
+            }
+            startActivity(profileIntent)
+        }
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
 
     }
 
@@ -49,6 +69,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
         if(!::mMap.isInitialized) return
         if(isLocationPermissionGranted()){
             mMap.isMyLocationEnabled = true
+            //mMap.myLocation
         }else{
             requestLocationPermission()
         }
@@ -104,15 +125,38 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        createMarker()
+        //createMarker()
         mMap.setOnMyLocationButtonClickListener(this)
         mMap.setOnMyLocationClickListener (this)
         enableLocation()
+        val myLocationButton = findViewById<View>(R.id.map).findViewWithTag<View>("GoogleMapMyLocationButton")
+
+        val layoutParams = RelativeLayout.LayoutParams(160, 160)
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE)
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE)
+        layoutParams.setMargins(0,0,16, 16)
+        //(myLocationButtonLayout as? RelativeLayout.LayoutParams)?.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
+        myLocationButton.layoutParams = layoutParams
+
+        var ubicacionActual = fusedLocationClient.lastLocation.addOnSuccessListener {
+            var coordenadas = LatLng(it.latitude, it.longitude)
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 18f), 4000, null)
+        }
+
+
+
+
+
+        myLocationButton.postDelayed(5000) {
+            myLocationButton.callOnClick()
+        }
+
+
     }
     private fun createMarker(){
-        val favoritePlace = LatLng(28.044195, -16.5363842)
-        mMap.addMarker(MarkerOptions().position(favoritePlace).title("Mi playa favorita!"))
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(favoritePlace, 18f), 4000, null)
+        //val favoritePlace = LatLng(28.044195, -16.5363842)
+        //mMap.addMarker(MarkerOptions().position(favoritePlace).title("Mi playa favorita!"))
+        //mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(favoritePlace, 18f), 4000, null)
     }
 
     override fun onMyLocationButtonClick(): Boolean {
@@ -123,6 +167,5 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMyLoca
     override fun onMyLocationClick(p0: Location) {
         Toast.makeText(this, "Estas en ${p0.latitude}, ${p0.longitude}", Toast.LENGTH_SHORT).show()
     }
-
 
 }

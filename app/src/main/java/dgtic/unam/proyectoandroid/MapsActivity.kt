@@ -7,6 +7,7 @@ import android.content.pm.PackageManager
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.RelativeLayout
 import android.widget.Toast
@@ -138,9 +139,19 @@ class MapsActivity : AppCompatActivity(),
         //(myLocationButtonLayout as? RelativeLayout.LayoutParams)?.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0)
         myLocationButton.layoutParams = layoutParams
 
+
+
         var ubicacionActual = fusedLocationClient.lastLocation.addOnSuccessListener {
             var coordenadas = LatLng(it.latitude, it.longitude)
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 18f), 4000, null)
+            var gasolinerasCerca =  NearestGasStation.getTopFiveNearestStations(getGasStation(), coordenadas)
+
+            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[0].location))
+            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[1].location))
+            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[2].location))
+            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[3].location))
+            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[4].location))
+
         }
 
 
@@ -167,5 +178,7 @@ class MapsActivity : AppCompatActivity(),
     override fun onMyLocationClick(p0: Location) {
         Toast.makeText(this, "Estas en ${p0.latitude}, ${p0.longitude}", Toast.LENGTH_SHORT).show()
     }
+
+
 
 }

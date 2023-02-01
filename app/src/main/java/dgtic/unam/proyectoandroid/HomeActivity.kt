@@ -8,11 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import dgtic.unam.proyectoandroid.databinding.ActivityHomeBinding
 
 
-enum class ProviderType{
-    BASIC,
-    GOOGLE,
-    FACEBOOK
-}
+
 class HomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityHomeBinding
     override fun onCreate(savedInstanceState: Bundle?) {

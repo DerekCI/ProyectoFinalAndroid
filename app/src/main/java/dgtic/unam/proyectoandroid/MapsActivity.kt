@@ -22,6 +22,11 @@ import com.google.android.gms.maps.model.*
 
 import dgtic.unam.proyectoandroid.databinding.ActivityMapsBinding
 
+enum class ProviderType{
+    BASIC,
+    GOOGLE,
+    FACEBOOK
+}
 class MapsActivity : AppCompatActivity(),
     OnMapReadyCallback,
     GoogleMap.OnMyLocationButtonClickListener,
@@ -42,19 +47,29 @@ class MapsActivity : AppCompatActivity(),
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+
+
+
+
         val bundle = intent.extras
         val email = bundle?.getString("email")
-        //val provider = bundle?.getString("provider")
+        val provider = bundle?.getString("provider")
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
+        //guardado de datos
+        val prefs = getSharedPreferences("dgtic.unam.firebase.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE).edit()
+        prefs.putString("email", email)
+        prefs.putString("provider", provider)
+        prefs.apply()
+
 
         binding.perfilButton.setOnClickListener{
             val profileIntent = Intent(this, ProfileActivity::class.java).apply {
                 putExtra("email", email)
-                //putExtra("provider", provider.name)
+                putExtra("provider", provider)
             }
             startActivity(profileIntent)
         }
@@ -146,11 +161,11 @@ class MapsActivity : AppCompatActivity(),
             mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(coordenadas, 18f), 4000, null)
             var gasolinerasCerca =  NearestGasStation.getTopFiveNearestStations(getGasStation(), coordenadas)
 
-            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[0].location))
-            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[1].location))
-            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[2].location))
-            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[3].location))
-            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[4].location))
+            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[0].location).title("Gasolinera 1"))
+            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[1].location).title("Gasolinera 2"))
+            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[2].location).title("Gasolinera 3"))
+            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[3].location).title("Gasolinera 4"))
+            mMap.addMarker(MarkerOptions().position(gasolinerasCerca[4].location).title("Gasolinera 5"))
 
         }
 
@@ -161,6 +176,19 @@ class MapsActivity : AppCompatActivity(),
         myLocationButton.postDelayed(5000) {
             myLocationButton.callOnClick()
         }
+
+        //setup
+        val bundle = intent.extras
+        val email = bundle?.getString("email")
+        //val provider = bundle?.getString("provider")
+        //setup(email?:"", provider?:"")
+
+
+        //guardado de datos
+        val prefs = getSharedPreferences("dgtic.unam.firebase.PREFERENCE_FILE_KEY", Context.MODE_PRIVATE).edit()
+        prefs.putString("email", email)
+        //prefs.putString("provider", provider)
+        prefs.apply()
 
 
     }

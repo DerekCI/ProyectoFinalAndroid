@@ -105,7 +105,8 @@
             android:layout_height="wrap_content"
             android:contentDescription="@string/all"
 
-            app:srcCompat="@drawable/img_1" />
+            app:srcCompat="@drawable/img_1"
+            app:tint="#10589B" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -149,7 +150,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="32dp"
-                android:background="@color/blue"
+                android:background="@color/color_primario"
                 android:paddingLeft="64dp"
                 android:paddingRight="64dp"
                 android:text="@string/update_profile"

@@ -172,11 +172,6 @@ class MapsActivity : AppCompatActivity(),
 
 
 
-
-        myLocationButton.postDelayed(5000) {
-            myLocationButton.callOnClick()
-        }
-
         //setup
         val bundle = intent.extras
         val email = bundle?.getString("email")

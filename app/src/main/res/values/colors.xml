@@ -12,4 +12,6 @@
     <color name="secondary_color">#9896EC</color>
     <color name="tertiary_color">#AAEDAC</color>
 
+    <color name="logo">#005AA0</color>
+
 </resources>

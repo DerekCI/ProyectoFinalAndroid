@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    tools:context=".AuthActivity">
+    tools:context=".SignInActivity">
 
 
     <LinearLayout
@@ -84,37 +83,18 @@
                 android:layout_weight="1" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/logInButton"
+                android:id="@+id/signInButton"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginBottom="16dp"
                 android:background="@drawable/ic_buttom"
                 android:paddingLeft="64dp"
                 android:paddingRight="64dp"
-                android:text="@string/iniciar_sesion"
+                android:text="@string/registrarse"
                 android:textColor="@color/white" />
 
+
         </LinearLayout>
-
-        <Button
-            android:id="@+id/googleButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/google"
-            android:textColor="#757575"
-
-            app:backgroundTint="?attr/colorButtonNormal"
-            app:iconSize="40dp" />
-
-        <Button
-            android:id="@+id/facebookButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Facebook"
-            app:backgroundTint="@color/com_facebook_messenger_blue"
-            app:iconSize="40dp" />
-
         <LinearLayout
             android:id="@+id/linearLayout2"
             android:layout_width="match_parent"
@@ -141,12 +121,10 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_weight="0"
-                android:text="@string/link_signup"
+                android:text="@string/link_signin"
                 android:textColor="@color/color_primario"
                 android:textSize="24sp" />
         </LinearLayout>
 
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,7 @@ class AuthActivity : AppCompatActivity() {
     private val GOOGLE_SIGN_IN  = 100
     private val callbackManager = CallbackManager.Factory.create()
     private lateinit var binding: ActivityAuthBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
@@ -54,20 +55,7 @@ class AuthActivity : AppCompatActivity() {
 
     private fun setup(){
         title = "Autenticacion"
-        binding.signUpButton.setOnClickListener{
-            if(binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty()){
-                FirebaseAuth.getInstance().createUserWithEmailAndPassword(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString() ).addOnCompleteListener{
-                    if(it.isSuccessful){
 
-                        showMap(it.result?.user?.email ?: "", ProviderType.BASIC)
-                    }else{
-                        showAlert()
-                    }
-                }
-
-            }
-
-        }
         binding.logInButton.setOnClickListener{
             if(binding.emailEditText.text.isNotEmpty() && binding.passwordEditText.text.isNotEmpty()){
                 FirebaseAuth.getInstance().signInWithEmailAndPassword(binding.emailEditText.text.toString(), binding.passwordEditText.text.toString() ).addOnCompleteListener{
@@ -116,6 +104,11 @@ class AuthActivity : AppCompatActivity() {
                         showAlert()
                     }
                 })
+        }
+
+        binding.signInTextView.setOnClickListener {
+            val intent = Intent(this, SignInActivity::class.java)
+            this.startActivity(intent)
         }
 
 

@@ -15,10 +15,11 @@
         <entry key="app/src/main/res/drawable/ic_profile.xml" value="0.122" />
         <entry key="app/src/main/res/drawable/ic_sign_out.xml" value="0.122" />
         <entry key="app/src/main/res/drawable/ic_user.xml" value="0.122" />
-        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.236992523635643" />
+        <entry key="app/src/main/res/layout/activity_auth.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.36505954023720566" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.2505881046903306" />
-        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.2122222900390625" />
+        <entry key="app/src/main/res/layout/activity_profile.xml" value="0.21343078613281252" />
+        <entry key="app/src/main/res/layout/activity_sign_in.xml" value="0.24857394453408063" />
       </map>
     </option>
   </component>
@@ -27,5 +28,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.24857394453408063" />
+      </ProjectState>
+    </option>
   </component>
 </project>

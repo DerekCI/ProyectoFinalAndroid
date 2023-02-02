@@ -58,7 +58,10 @@ class ProfileActivity : AppCompatActivity() {
             }
 
             FirebaseAuth.getInstance().signOut()
-            onBackPressed()
+
+            val homeIntent = Intent(this, AuthActivity::class.java).apply {
+            }
+            startActivity(homeIntent)
         }
 
     }
@@ -106,7 +109,7 @@ class ProfileActivity : AppCompatActivity() {
                 .with(this)
                 .load(user.photoUrl)
                 .centerCrop()
-                .placeholder(R.drawable.ic_baseline_person_24)
+                .placeholder(R.drawable.img_1)
                 .into(binding.profileImageView)
 
         }

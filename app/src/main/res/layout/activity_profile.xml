@@ -165,24 +165,11 @@
                 android:layout_marginBottom="16dp"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/updatePasswordTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:text="@string/change_password" />
-
                 <Space
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
-                <TextView
-                    android:id="@+id/deleteAccountTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:text="@string/delete_account" />
             </LinearLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
